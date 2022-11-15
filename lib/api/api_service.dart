@@ -17,7 +17,7 @@ class PokeLink {
 
 class ApiService {
   Future<List<PokeLink>> getPokeList() async {
-    var url = Uri.parse(ApiConstants.baseUrl);
+    var url = Uri.parse(ApiConstants.baseUrl + ApiConstants.all);
     var response = await http.get(url);
     if (response.statusCode == 200) {
       LinkedHashMap l = jsonDecode(response.body);
