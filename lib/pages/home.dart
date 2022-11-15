@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dex/components/list_item.dart';
 
 import '../api/api_service.dart';
 
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
           return ListView(
             children: [
               for (var item in snapshot.data!)
-                Text(item.name)
+                ListItem(item)
             ],
           );
         }
