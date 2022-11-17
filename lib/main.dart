@@ -30,6 +30,9 @@ class MyApp extends StatelessWidget {
             color: Colors.white, fontSize: 30, fontFamily: 'Ethnocentric'),
         child: HomePage(),
       ),
+      routes: {
+        
+      },
     );
   }
 }
