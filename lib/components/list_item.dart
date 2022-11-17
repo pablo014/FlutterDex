@@ -3,7 +3,8 @@ import 'package:flutter_dex/api/api_service.dart';
 
 class ListItem extends StatefulWidget {
   final PokeLink link;
-  const ListItem(this.link, {Key? key}) : super(key: key);
+  final int index;
+  const ListItem(this.link, this.index, {Key? key}) : super(key: key);
 
   @override
   State<ListItem> createState() => _ListItemState();
@@ -12,14 +13,21 @@ class ListItem extends StatefulWidget {
 class _ListItemState extends State<ListItem> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(width: 1, color: Colors.grey),
-        borderRadius: BorderRadius.circular(10)
+    return GestureDetector(
+      onTap: () {
+
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(width: 4, color: Colors.grey),
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.grey[600]),
+        padding: const EdgeInsets.all(8),
+        margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+        child: Text(
+          '${widget.index}. ${widget.link.name.toUpperCase()}',
+        ),
       ),
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-      child: Text(widget.link.name.toUpperCase(), style: const TextStyle(fontFamily: 'Ethnocentric'),),
     );
   }
 }

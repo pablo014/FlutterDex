@@ -26,21 +26,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<PokeLink>>(
-      future: pokeList,
+        future: pokeList,
         builder: (context, snapshot) {
-        if(snapshot.hasData) {
-          return ListView(
-            children: [
-              for (var item in snapshot.data!)
-                ListItem(item)
-            ],
-          );
-        }
-        else if (snapshot.hasError) {
-          return Text('${snapshot.error}');
-        } else {
-          return const CircularProgressIndicator();
-        }
+          if (snapshot.hasData) {
+            return ListView(
+              children: [
+                for (int x = 0; x < snapshot.data!.length; x++)
+                  ListItem(snapshot.data![x], x + 1)
+              ],
+            );
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          } else {
+            return const CircularProgressIndicator();
+          }
         });
   }
 }
