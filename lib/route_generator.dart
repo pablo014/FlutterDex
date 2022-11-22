@@ -8,18 +8,24 @@ class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     final name = settings.name;
+
+    Widget route;
     switch (name) {
       case '':
-        return MaterialPageRoute(builder: (_) => const HomePage());
+        route = const HomePage();
+        break;
       case 'display':
         if(args is List) {
-          return MaterialPageRoute(builder: (_) => Display(id: args[0]));
+          route = Display(id: args[0]);
         } else {
-          return MaterialPageRoute(builder: (_) => const ErrorRoute());
+          route = const ErrorRoute();
         }
+        break;
       default:
-        return MaterialPageRoute(builder: (_) => const ErrorRoute());
+        route = const ErrorRoute();
     }
+    return MaterialPageRoute(builder: (_) => DefaultTextStyle(style: const TextStyle(
+        color: Colors.white, fontSize: 30, fontFamily: 'Ethnocentric'), child: route));
 }
 }
 

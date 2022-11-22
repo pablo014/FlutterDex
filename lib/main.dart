@@ -17,11 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const DefaultTextStyle(
-        style: TextStyle(
-            color: Colors.white, fontSize: 30, fontFamily: 'Ethnocentric'),
-        child: HomePage(),
-      ),
+      initialRoute: '',
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
