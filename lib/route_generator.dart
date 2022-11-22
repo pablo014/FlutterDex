@@ -7,12 +7,13 @@ import 'package:flutter/material.dart';
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
-    switch (args) {
-      case '/':
+    final name = settings.name;
+    switch (name) {
+      case '':
         return MaterialPageRoute(builder: (_) => const HomePage());
-      case '/display':
-        if(args is String) {
-          return MaterialPageRoute(builder: (_) => Display(id: args));
+      case 'display':
+        if(args is List) {
+          return MaterialPageRoute(builder: (_) => Display(id: args[0]));
         } else {
           return MaterialPageRoute(builder: (_) => const ErrorRoute());
         }

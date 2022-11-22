@@ -13,11 +13,7 @@ class ListItem extends StatefulWidget {
 class _ListItemState extends State<ListItem> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-
-      },
-      child: Container(
+    return Container(
         decoration: BoxDecoration(
             border: Border.all(width: 4, color: Colors.grey),
             borderRadius: BorderRadius.circular(10),
@@ -27,7 +23,6 @@ class _ListItemState extends State<ListItem> {
         child: Text(
           '${widget.index}. ${widget.link.name.toUpperCase()}',
         ),
-      ),
     );
   }
 }
