@@ -32,7 +32,12 @@ class _HomePageState extends State<HomePage> {
             return ListView(
               children: [
                 for (int x = 0; x < snapshot.data!.length; x++)
-                  ListItem(snapshot.data![x], x + 1)
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, 'display', arguments: [snapshot.data![x].id]);
+                    },
+                    child: ListItem(snapshot.data![x], x + 1),
+                  )
               ],
             );
           } else if (snapshot.hasError) {

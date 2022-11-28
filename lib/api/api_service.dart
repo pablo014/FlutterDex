@@ -12,8 +12,8 @@ class PokeLink {
   const PokeLink({required this.name, required this.url, required this.id});
 
   factory PokeLink.fromJson(Map<String, dynamic> json) {
-    String url = json['url'].toString();
-    String id = url.substring(url.indexOf('pokemon/'));
+    String url = json['url'];
+    String id = url.split('/')[6];
     return PokeLink(name: json['name'], url: json['url'], id: id);
   }
 }
@@ -26,9 +26,11 @@ class Species {
   const Species({required this.name, required this.image, required this.flavorText});
 
   factory Species.fromJson(LinkedHashMap<String, dynamic> sJson, LinkedHashMap<String, dynamic> bJson) {
+    // print(sJson['flavor_text_entries'][0]['language']['name']);
     //flavor text filter by language 'en'
-    String flavorText = sJson['flavor_text_entries'].firstWhere((element) => element['language']['name'] == 'en');
-    return Species(name: sJson['name'], image: bJson['sprites']['official-artwork']['front_default'], flavorText: flavorText);
+    var flavorText = sJson['flavor_text_entries'].firstWhere((element) => element['language']['name'] == 'en')['flavor_text'];
+    print(bJson['sprites']['other']['official-artwork']['front_default']);
+    return Species(name: sJson['name'], image: bJson['sprites']['other']['official-artwork']['front_default'], flavorText: flavorText);
   }
 }
 
@@ -48,6 +50,7 @@ class ApiService {
     }
   }
   Future<Species> getSpecies(String id) async {
+    //TODO fix how get species by id
     var url = Uri.parse(ApiConstants.species + id);
     var burl = Uri.parse('${ApiConstants.baseUrl}/$id');
     var sResponse = await http.get(url);
