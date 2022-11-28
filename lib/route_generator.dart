@@ -1,7 +1,6 @@
 import 'package:flutter_dex/pages/display.dart';
 import 'package:flutter_dex/pages/home.dart';
 
-import 'main.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {

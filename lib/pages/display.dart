@@ -27,7 +27,13 @@ class _DisplayState extends State<Display> {
       future: s,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Text(snapshot.data!.name);
+          return Column(
+            children: [
+              Text(snapshot.data!.name),
+              Image.network(snapshot.data!.image),
+              Text(snapshot.data!.flavorText)
+            ],
+          );
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
         } else {

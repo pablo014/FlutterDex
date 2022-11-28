@@ -50,6 +50,7 @@ class ApiService {
     }
   }
   Future<Species> getSpecies(String id) async {
+    //TODO fix how get species by id
     var url = Uri.parse(ApiConstants.species + id);
     var burl = Uri.parse('${ApiConstants.baseUrl}/$id');
     var sResponse = await http.get(url);
