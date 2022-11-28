@@ -23,23 +23,35 @@ class _DisplayState extends State<Display> {
   }
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Species>(
-      future: s,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Column(
-            children: [
-              Text(snapshot.data!.name),
-              Image.network(snapshot.data!.image),
-              Text(snapshot.data!.flavorText)
-            ],
-          );
-        } else if (snapshot.hasError) {
-          return Text('${snapshot.error}');
-        } else {
-          return const CircularProgressIndicator();
-        }
-      },
+    return SafeArea(
+      child: FutureBuilder<Species>(
+        future: s,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return SingleChildScrollView(
+              child:
+                  Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child: GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: const Icon(Icons.chevron_left, color: Colors.white, size: 50,)
+                        ),
+                      ),
+                      Text(snapshot.data!.name, style: const TextStyle(fontSize: 35),),
+                      Image.network(snapshot.data!.image),
+                      Text(snapshot.data!.flavorText)
+                    ],
+                  ),
+            );
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          } else {
+            return const CircularProgressIndicator();
+          }
+        },
+      ),
     );
   }
 }
