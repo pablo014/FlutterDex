@@ -26,10 +26,9 @@ class Species {
   const Species({required this.name, required this.image, required this.flavorText});
 
   factory Species.fromJson(LinkedHashMap<String, dynamic> sJson, LinkedHashMap<String, dynamic> bJson) {
-    // print(sJson['flavor_text_entries'][0]['language']['name']);
+    var language = 'en';
     //flavor text filter by language 'en'
-    var flavorText = sJson['flavor_text_entries'].firstWhere((element) => element['language']['name'] == 'en')['flavor_text'];
-    print(bJson['sprites']['other']['official-artwork']['front_default']);
+    var flavorText = sJson['flavor_text_entries'].firstWhere((element) => element['language']['name'] == language)['flavor_text'];
     return Species(name: sJson['name'], image: bJson['sprites']['other']['official-artwork']['front_default'], flavorText: flavorText);
   }
 }
@@ -42,7 +41,9 @@ class ApiService {
       LinkedHashMap l = jsonDecode(response.body);
       List<PokeLink> i = [];
       for (Map<String, dynamic> e in l['results']) {
-        i.add(PokeLink.fromJson(e));
+        if (int.parse(e['url'].split('/')[6]) < 1000) {
+          i.add(PokeLink.fromJson(e));
+        }
       }
       return i;
     } else {
